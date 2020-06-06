@@ -15,7 +15,7 @@ def display_todos():
     cur.close()
     return todos
 
-@bp.route("/", methods=('GET', 'POST'))
+@bp.route("/home", methods=('GET', 'POST'))
 def index():
     """View for home page which shows list of to-do items."""
 
