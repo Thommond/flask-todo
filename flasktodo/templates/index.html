@@ -1,105 +1,10 @@
 {% extends 'base.html' %}
-
 {% block content %}
-<article><!--Start of article-->
+<article class="">
 
+  <h1>Welcome to Simple To Do</h1>
 
+  <a href="url_for{{ 'todo' }}">Create a TODO</a>
 
-  <h1>A Simple To-do Application</h1>
-
-
-
-<!--Fliters baised on task type-->
-<form  method="post"  action='/'>
-
-<label for="dropDown">Filter Here:
-
-  <select  name="dropDown" required>
-
-    <option value="toDo">ToDo</option>
-    <option value="finished">Completed</option>
-    <option value="allTasks" selected>All Tasks</option>
-
-  </select>
-
-  <input type="submit" name="applyFilter" value="Filter" >
-
-  </label>
-
-</form>
-
-<section><!--Start of ul section-->
-
-  <ul>
-
-    {% for todo in todos %}
-
-
-      <li class="{{ "completed" if todo['completed'] }}">
-
-        {{ todo['description'] }}
-
-        <div class="buttons">
-
-
-        {% if not todo['completed'] %}
-
-        <!--Form for the edit feature -->
-        <form action="/Edit" method="post" class='smallButton'>
-          <button type="submit"  name="EditButton" value="{{ todo['id'] }}">Edit</button>
-          <input type="text" name="EditDesc" value="Edit Here"required>
-        </form>
-
-        <!--Form for completed feature-->
-        <form  action="/Done" method="post" class='smallButton'>
-            <button  type="submit" name="doneButton" value="{{ todo['id'] }}">Complete</button>
-        </form>
-
-
-
-
-        {% endif %}
-
-        <!--Form for delete feature-->
-        <form action="/Delete" method="post" class='smallButton'>
-          <button  type="submit" name="deleteButton" value="{{ todo['id'] }}">Delete</button>
-        </form>
-
-        {% if todo['completed'] %}
-        <!--Form for redoing a task-->
-        <form  action="/RedoTask" method="post" class='smallButton'>
-          <button type="submit" name="redoTask" value="{{ todo['id'] }}">Redo Task</button>
-        </form>
-
-        {% endif %}
-
-        </div>
-
-      </li>
-
-      {% if not loop.last %}
-      <hr>
-      {% endif %}
-
-
-
-
-    {% endfor %}
-
-  </ul>
-
-</section><!--End of ul section-->
-
-<!--Form for adding a task to the list-->
-  <form class="todoPrompt" method="post" action='/addATask'>
-
-    <label for="todoPrompt">Add a Task</label>
-
-    <input type="text" name='addTask' value="Ex: Feed Dog" id='addTasks' class='textInput' required>
-
-    <input type="submit" name="addTaskButton" value="Add">
-
-  </form>
-
-</article><!--End of the article-->
+</article>
 {% endblock %}

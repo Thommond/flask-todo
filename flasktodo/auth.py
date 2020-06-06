@@ -13,25 +13,27 @@ def register():
     if request.method == 'POST':
         username = request.form['email']
         password = request.form['pass']
-        db = get_db()
         error = None
         # Checking if field were filled out if not error
         if not email:
             error = 'Username is required.'
         elif not password:
             error = 'Passoword is required.'
-        # Checking if user does not already exist
-        elif db.execute(
-            'SELECT id FROM users WHERE email = ?', (email, )
-        ).fetchone() is not None:
-            error = 'Email is already taken.'.format(email)
-        # Enterning forms if no errors
+
+        with db.get_db() as con:
+            with con.cursor() as cur:
+            # Checking if user does not already exist
+            if cur.execute(
+                'SELECT id FROM users WHERE email = ?', (email, )
+            ).fetchone() is not None:
+                error = 'Email is already taken.'.format(email)
+            # Enterning forms if no errors
         if error is None:
-            db.execute(
+            cur.execute(
             'INSERT INTO users (email, password) VALUES (?, ?)',
             (email, generate_password_hash(password), )
             )
-            db.commit()
+            .commit()
             return redirect(url_for('auth.login'))
 
         flash(error)
@@ -45,6 +47,12 @@ def login():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['pass']
+        db = get_db()
+        error = None
+        user = db.execute(
+            'SELECT * FROM users WHERE email = ?', (email,)
+        ).fetchone()
+        cursor.close()
 
 @bp.before_app_request
 def load_logged_in_user():
