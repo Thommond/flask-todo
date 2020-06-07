@@ -43,7 +43,7 @@ def register():
                     (email, generate_password_hash(password), )
                     )
                     con.commit()
-                    
+
                     return redirect(url_for('auth.login'))
 
         flash(error)
@@ -66,17 +66,17 @@ def login():
                 query = 'SELECT * FROM users WHERE email = %s'
                 cur.execute(query, (email,))
                 user = cur.fetchone()
-                print(user)
+
                 if user is None:
                     error = 'Incorrect username or password'
 
-                if not check_password_hash(password, user['password']):
+                elif not check_password_hash(password, user['password']):
                     error = 'Incorrect username or password'
 
                 if error is None:
                     session.clear()
                     session['user_id'] = user['id']
-                    return redirect(url_for('todo'))
+                    return redirect(url_for('index'))
 
             flash(error)
 

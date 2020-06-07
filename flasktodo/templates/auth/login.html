@@ -1,18 +1,22 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Log In</title>
-  </head>
-  <body>
+{% extends 'base.html' %}
 
-    {% for message in get_flashed_messages() %}
-    <p class="flash">{{ message }}</p>
-    {% endfor %}
+{% block title %} Login {% endblock %}
+
+{% block content %}
+
+
+    <section class='authen'>
+
+      {% for message in get_flashed_messages() %}
+      <p class="flash">{{ message }}</p>
+      {% endfor %}
+
+      <h1>Login to Simple Todo</h1>
 
     <form class="auth" action="{{ url_for('auth.login') }}" method="post">
-      <label for="email">Email:
-      <input type="text" name="email" value="example@gmail.com">
+
+      <label for="email" >Email:
+      <input type="text" name="email" class='emailIn' value="example@gmail.com">
       </label>
 
       <label for="pass">Password:
@@ -25,5 +29,6 @@
 
     <h2>Not a user? <a href="{{ url_for('auth.register') }}">Sign Up</a></h2>
 
-  </body>
-</html>
+    </section>
+
+{% endblock %}
