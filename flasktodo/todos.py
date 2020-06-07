@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request
 
 from . import db
+from .auth import login_required
 import psycopg2
 import psycopg2.extras
 
@@ -16,6 +17,7 @@ def display_todos():
     return todos
 
 @bp.route("/home", methods=('GET', 'POST'))
+@login_required
 def todo():
     """View for home page which shows list of to-do items."""
 
@@ -53,6 +55,7 @@ def todo():
     return render_template("todo.html", todos=todos)
 
 @bp.route('/addATask', methods=('GET', 'POST'))
+@login_required
 def adding_A_Task():
     """Adding a task function so the user can update their to-dos"""
     if request.method == 'POST':
@@ -77,6 +80,7 @@ def adding_A_Task():
     return render_template("todo.html", todos=todos)
 
 @bp.route('/Done', methods=('GET', 'POST'))
+@login_required
 def task_is_done():
     """Marking a Task as completed so the user knows they are done"""
     if request.method == 'POST':
@@ -102,6 +106,7 @@ def task_is_done():
     return render_template("todo.html", todos=todos)
 
 @bp.route('/Edit', methods=('GET', 'POST'))
+@login_required
 def editing_feature():
     """So the user can change the description of a To Do item"""
     if request.method == 'POST':
@@ -128,6 +133,7 @@ def editing_feature():
     return render_template("todo.html", todos=todos)
 
 @bp.route('/RedoTask', methods=('GET', 'POST'))
+@login_required
 def redo_a_task():
     """Allows the user to unfinish a task
     so they can complete it again"""
@@ -154,11 +160,12 @@ def redo_a_task():
     return render_template("todo.html", todos=todos)
 
 @bp.route('/Delete', methods=('GET', 'POST'))
+@login_required
 def delete_feature():
     """So the user can delete a post that takes up space"""
 
     if request.method == 'POST':
-        
+
         deleteTask = request.form['deleteButton']
         # get the database connection
         with db.get_db() as con:

@@ -5,11 +5,25 @@
     <title>Log In</title>
   </head>
   <body>
-    <form class="auth" action="url_for{{'login.html'}}" method="post">
+
+    {% for message in get_flashed_messages() %}
+    <p class="flash">{{ message }}</p>
+    {% endfor %}
+
+    <form class="auth" action="{{ url_for('auth.login') }}" method="post">
+      <label for="email">Email:
       <input type="text" name="email" value="example@gmail.com">
+      </label>
+
+      <label for="pass">Password:
       <input type="text" name="pass" value="Password">
-      <button type="submit" name="LogButton">Log In</button>
+      </label>
+
+      <input type="submit" value="Login">
+
     </form>
+
+    <h2>Not a user? <a href="{{ url_for('auth.register') }}">Sign Up</a></h2>
 
   </body>
 </html>

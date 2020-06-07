@@ -9,11 +9,11 @@ DROP TABLE IF EXISTS todos;
 DROP TABLE IF EXISTS users;
 
 -- Users
-CREATE TABLE users {
-  id bigserial PRIMARY KEY,
+CREATE TABLE users (
+  user_id bigserial PRIMARY KEY,
   email varchar(100) UNIQUE NOT NULL ,
-  password varchar(100) NOT NULL ,
-}
+  password varchar(100) NOT NULL
+);
 
 -- To-Do Items
 CREATE TABLE todos (
@@ -21,5 +21,5 @@ CREATE TABLE todos (
     description varchar(140) NOT NULL,
     completed boolean NOT NULL,
     created_at timestamp with time zone NOT NULL,
-    users_id REFERENCES users(id)
+    users_id bigint REFERENCES users(user_id)
 );

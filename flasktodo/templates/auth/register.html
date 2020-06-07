@@ -5,10 +5,26 @@
     <title>Register</title>
   </head>
   <body>
-    <form class='auth' action="url_for{{'register.html'}}" method="post">
+
+    {% for message in get_flashed_messages() %}
+    <p class="flash">{{ message }}</p>
+    {% endfor %}
+
+    <form class='auth' action="{{ url_for('auth.register') }}" method="post">
+
+      <label for="email">Email:
       <input type="text" name="email" value="example@gmail.com">
+      </label>
+
+      <label for="pass">Password:
       <input type="text" name="pass" value="Password">
-      <button type="submit" name="regButton">Sign Up</button>
+      </label>
+
+      <input type="submit" value="register">
+      
     </form>
+
+    <h2>Already a user? <a href="{{ url_for('auth.login') }}">Log In</a></h2>
+
   </body>
 </html>
