@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, url_for, session, g, redirect, flash
 
+
 import functools
 
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -26,7 +27,7 @@ def register():
 
                 # Checking if field were filled out if not error
                 if not email:
-                    error = 'Username is required.'
+                    error = 'Email is required.'
                 elif not password:
                     error = 'Password is required.'
                     # Checking if user does not already exist
@@ -40,7 +41,7 @@ def register():
                 if error is None:
                     cur.execute(
                     'INSERT INTO users (email, password) VALUES (%s, %s)',
-                    (email, generate_password_hash(password), )
+                    (email, generate_password_hash(password))
                     )
                     con.commit()
 
@@ -68,14 +69,16 @@ def login():
                 user = cur.fetchone()
 
                 if user is None:
+
                     error = 'Incorrect username or password'
 
-                elif not check_password_hash(password, user['password']):
+                elif not check_password_hash(user['password'], password):
                     error = 'Incorrect username or password'
+                    print(check_password_hash(password, user['password']))
 
                 if error is None:
                     session.clear()
-                    session['user_id'] = user['id']
+                    session['user_id'] = user['user_id']
                     return redirect(url_for('index'))
 
             flash(error)
@@ -90,9 +93,12 @@ def load_logged_in_user():
     if user_id is None:
         g.user = None
     else:
-        g.user = db.get_db().execute(
-            'SELECT * FROM users WHERE user_id = %s', (user_id,)
-        ).fetchone()
+        with db.get_db() as con:
+            with con.cursor() as cur:
+                query = 'SELECT * FROM users WHERE user_id = %s'
+                cur.execute( query, (user_id,))
+                userCheck = cur.fetchone()
+                g.user = userCheck
 
 @bp.route('/logout')
 def logout():

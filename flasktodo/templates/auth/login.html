@@ -7,11 +7,13 @@
 
     <section class='authen'>
 
+
+
+      <h1>Login to Simple Todo</h1>
+
       {% for message in get_flashed_messages() %}
       <p class="flash">{{ message }}</p>
       {% endfor %}
-
-      <h1>Login to Simple Todo</h1>
 
     <form class="auth" action="{{ url_for('auth.login') }}" method="post">
 
