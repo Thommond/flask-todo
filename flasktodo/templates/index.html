@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
+
 {% block content %}
 <article class="">
 
-  <a class='back' href="">Log Out</a>
+  <a class='back' href="{{url_for('auth.logout')}}">Log Out</a>
 
-  <h1>Welcome to Simple To Do</h1>
+  <h1>Welcome to Simple To Do {{ name }}</h1>
 
   <a href="{{ url_for('todos.todo')}}">Create a TODO</a>
 

@@ -18,6 +18,7 @@ def register():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['pass']
+        firstName = request.form['name']
         error = None
 
         # get the database connection
@@ -40,8 +41,8 @@ def register():
                     # Enterning forms if no errors
                 if error is None:
                     cur.execute(
-                    'INSERT INTO users (email, password) VALUES (%s, %s)',
-                    (email, generate_password_hash(password))
+                    'INSERT INTO users (email, name, password) VALUES (%s, %s, %s)',
+                    (email, firstName, generate_password_hash(password))
                     )
                     con.commit()
 

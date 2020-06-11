@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, g
 
 from . import db
 from .auth import login_required
@@ -11,10 +11,18 @@ bp = Blueprint("todos", __name__)
 def display_todos():
     # Displays all the to-dos on the todo.html
     cur = db.get_db().cursor()
-    cur.execute('SELECT * FROM todos')
+    cur.execute('SELECT * FROM todos WHERE users_id = %s', (g.user['user_id'], ))
     todos = cur.fetchall()
     cur.close()
     return todos
+
+def get_user_info():
+    # Gets users name to be more personalized
+    cur = db.get_db().cursor()
+    cur.execute('SELECT * FROM users WHERE user_id = %s', (g.user['user_id'], ))
+    user = cur.fetchone()
+    return user
+
 
 @bp.route("/home", methods=('GET', 'POST'))
 @login_required
@@ -33,14 +41,14 @@ def todo():
                 if filterFeature == 'toDo':
                     # only displays todos with a completed field of false
                     cur.execute(
-                        'SELECT * FROM todos WHERE completed = False')
+                        'SELECT * FROM todos WHERE completed = False AND users_id = %s', (g.user['user_id'], ))
                     todos = cur.fetchall()
                     cur.close()
                 # code only runs if the request is finished
                 if filterFeature == 'finished':
                     # only displays todos with a completed field of true
                     cur.execute(
-                        'SELECT * FROM todos WHERE completed = True ')
+                        'SELECT * FROM todos WHERE completed = True AND users_id = %s', (g.user['user_id'], ))
                     todos = cur.fetchall()
                     cur.close()
                 # code only runs if the request is addTasks
