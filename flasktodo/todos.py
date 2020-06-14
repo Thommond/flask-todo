@@ -209,7 +209,7 @@ def delete_feature():
                 # Changes the table so the task is removed from the table
                 cur.execute(""" DELETE FROM todos WHERE id = %s
                 """,
-                            (deleteTask, g.user['id'])
+                            (deleteTask, )
                             )
                 con.commit()
 
