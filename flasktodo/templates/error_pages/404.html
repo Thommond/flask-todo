@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}404 Page{% endblock %}
+
+{% block content %}
+<article class="error_page">
+<a class='back' href="{{url_for('index')}}">Back</a>
+
+<h1>404</h1>
+
+<h2>The page you are looking for cannot be found.</h2>
+
+<p>Check the url if manually typed and try again. Or go back
+to home and continue completing tasks.</p>
+
+</article>
+{% endblock %}

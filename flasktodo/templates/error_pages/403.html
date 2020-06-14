@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}403 Page{% endblock %}
+
+{% block content %}
+<article class="error_page">
+
+<a class='back' href="{{url_for('index')}}">Back</a>
+
+<h1>403</h1>
+
+<h2>Forbidden you are not allowed to access the page you attempted
+to access.</h2>
+
+<p>Check the url if manually typed and try again. Or go back
+to home and continue completing tasks.</p>
+
+</article>
+{% endblock %}

@@ -2,6 +2,18 @@ import os
 
 from flask import Flask, render_template
 
+
+
+#####################
+#####Error Pages#####
+#####################
+def page_not_found(e):
+  return render_template('error_pages/404.html'), 404
+
+def not_allowed(e):
+  return render_template('error_pages/403.html'), 403
+#------------------------------------------
+
 def create_app(test_config=None):
     """Factory to configure and return a Flask application.
 
@@ -11,6 +23,8 @@ def create_app(test_config=None):
 
     # Create the Flask application object using this module's name
     app = Flask(__name__)
+    app.register_error_handler(404, page_not_found)
+    app.register_error_handler(403, not_allowed)
 
     # Configure App
     # -------------
@@ -54,6 +68,7 @@ def create_app(test_config=None):
     from . import todos
     app.register_blueprint(todos.bp)
 
+    #Route for home page
     @app.route('/')
     @auth.login_required
     def index():
