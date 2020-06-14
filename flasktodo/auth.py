@@ -1,3 +1,4 @@
+
 from flask import Blueprint, render_template, request, url_for, session, g, redirect, flash
 
 
@@ -117,3 +118,4 @@ def login_required(view):
         return view(**kwargs)
 
     return wrapped_view
+

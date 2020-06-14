@@ -68,12 +68,14 @@ def create_app(test_config=None):
     from . import todos
     app.register_blueprint(todos.bp)
 
+
     #Route for home page
     @app.route('/')
     @auth.login_required
     def index():
         user = todos.get_user_info()
         return render_template('index.html', user=user)
+
 
     # Return application object to be used by a WSGI server, like gunicorn
     return app
