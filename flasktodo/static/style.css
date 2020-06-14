@@ -27,6 +27,20 @@ body {
 Layout
 */
 
+a {
+ text-decoration: none;
+ color: black;
+}
+
+.back {
+  font-weight: bold;
+}
+
+a:hover {
+  color: orange;
+  text-decoration: underline;
+}
+
 article {
   border: 2px solid red;
   padding: 50px;
@@ -81,6 +95,23 @@ ul {
   list-style: none;
 }
 
+/*
+Errors
+*/
+.flash {
+  background: black;
+  display: flex;
+  width: 400px;
+  justify-content: center;
+  border: 2px solid black;
+  color: red;
+  font-weight: bold;
+  font-size: 14pt;
+  padding: 10px;
+  margin: 0;
+  margin-top: 20px;
+}
+
 
 /**
 Form Related
@@ -104,10 +135,13 @@ form {
   padding: 10px;
 }
 
-select {
-width: 200px;
-height: 75px;
-font-size: 20pt;
+.auth {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  height: 400px;
 }
 
 input, button {
@@ -122,4 +156,28 @@ input.textInput {
   background: white;
   font-size: 20pt;
   color:black;
+}
+
+.auth input {
+  padding: 10px;
+  width: 170px;
+  margin: 10px;
+}
+
+input.emailIn {
+  width: 270px;
+}
+
+label {
+  font-weight: bold;
+}
+
+label.emailIn {
+  width: 290px;
+}
+
+select {
+width: 200px;
+height: 75px;
+font-size: 20pt;
 }

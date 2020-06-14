@@ -1,37 +1,35 @@
-
 {% extends 'base.html' %}
 
-{% block title %} Register {% endblock %}
+{% block title %} Login {% endblock %}
 
 {% block content %}
 
+
     <section class='authen'>
 
-      <h1>Register for Simple Todo</h1>
+
+
+      <h1>Login to Simple Todo</h1>
 
       {% for message in get_flashed_messages() %}
       <p class="flash">{{ message }}</p>
       {% endfor %}
 
-    <form class='auth' action="{{ url_for('auth.register') }}" method="post">
+    <form class="auth" action="{{ url_for('auth.login') }}" method="post">
 
-      <label for="email">Email:
+      <label for="email" >Email:
       <input type="text" name="email" class='emailIn' value="">
-      </label>
-
-      <label for="name">First Name:
-      <input type="text" name="name" value="">
       </label>
 
       <label for="pass">Password:
       <input type="text" name="pass" value="">
       </label>
 
-      <input type="submit" value="Register">
+      <input type="submit" value="Login">
 
     </form>
 
-    <h2>Already a user? <a href="{{ url_for('auth.login') }}">Log In</a></h2>
+    <h2>Not a user? <a href="{{ url_for('auth.register') }}">Sign Up</a></h2>
 
     </section>
 
