@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS users;
 
 -- Users
 CREATE TABLE users (
-  user_id bigserial PRIMARY KEY,
+  id bigserial PRIMARY KEY,
   email varchar(100) UNIQUE NOT NULL ,
   password varchar(100) NOT NULL,
   name varchar(100) NOT NULL
@@ -22,5 +22,5 @@ CREATE TABLE todos (
     description varchar(140) NOT NULL,
     completed boolean NOT NULL,
     created_at timestamp with time zone NOT NULL,
-    users_id bigint REFERENCES users(user_id)
+    user_id bigint REFERENCES users(id)
 );

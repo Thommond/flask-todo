@@ -5,7 +5,7 @@
 
   <a class='back' href="{{url_for('auth.logout')}}">Log Out</a>
 
-  <h1>{{ name }}'s Simple To-do</h1>
+  <h1>{{ user['name'] }}'s Simple To-do</h1>
 
   <a class='back' href="{{ url_for('index') }}">Back</a>
 

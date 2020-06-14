@@ -57,7 +57,8 @@ def create_app(test_config=None):
     @app.route('/')
     @auth.login_required
     def index():
-        return render_template('index.html')
+        user = todos.get_user_info()
+        return render_template('index.html', user=user)
 
     # Return application object to be used by a WSGI server, like gunicorn
     return app

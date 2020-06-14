@@ -32,7 +32,7 @@ def register():
                 elif not password:
                     error = 'Password is required.'
                     # Checking if user does not already exist
-                query = 'SELECT user_id FROM users WHERE email = %s'
+                query = 'SELECT id FROM users WHERE email = %s'
                 cur.execute(query, (email,))
                 check = cur.fetchone()
                 if check is not None:
@@ -79,7 +79,7 @@ def login():
 
                 if error is None:
                     session.clear()
-                    session['user_id'] = user['user_id']
+                    session['id'] = user['id']
                     return redirect(url_for('index'))
 
             flash(error)
@@ -90,13 +90,13 @@ def login():
 @bp.before_app_request
 def load_logged_in_user():
     """Gets the g.user of a login user and grabs session"""
-    user_id = session.get('user_id')
+    user_id = session.get('id')
     if user_id is None:
         g.user = None
     else:
         with db.get_db() as con:
             with con.cursor() as cur:
-                query = 'SELECT * FROM users WHERE user_id = %s'
+                query = 'SELECT * FROM users WHERE id = %s'
                 cur.execute( query, (user_id,))
                 userCheck = cur.fetchone()
                 g.user = userCheck
