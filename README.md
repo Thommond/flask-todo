@@ -2,15 +2,6 @@
 
 A simple to-do application written in Python using the [Flask web framework](https://flask.palletsprojects.com/en/1.1.x/) and [PostgreSQL](https://www.postgresql.org/).
 
-
-## Instructions
-
-You and a partner will work together to complete the [user stories in the documentation folder](doc/user-stories.md). Here are some helpful pieces of documentation:
-
-- [GitHub: Syncing a fork](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/syncing-a-fork)
-- [Psycopg: Basic Module Usage](https://www.psycopg.org/docs/usage.html)
-
-
 ## Installation
 
 Fork this repo and use `git clone` to get a copy of your fork on your local machine, then create and activate a virtual environment to install the dependencies.
@@ -46,7 +37,6 @@ Mock data is stored in `tests/data.sql` and will be inserted into the test datab
 $ flask mock-db
 ```
 
-
 ## Running the Application Locally
 
 ```sh
@@ -54,11 +44,4 @@ $ flask run
 ```
 
 You should be able to view the app at [http://localhost:5000]().
-
-
-## Deploy to Heroku
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-
-If you've forked this repo, you can deploy your code by clicking the button above.
 
