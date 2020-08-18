@@ -30,7 +30,7 @@ def create_app(test_config=None):
     # -------------
     # Default configuration, can be overwritten by specific environment
     app.config.from_mapping(
-        SECRET_KEY="dev",
+        SECRET_KEY="anything",
         DB_URL="postgresql://flasktodo_user@localhost/flasktodo",
         DB_SSLMODE="allow",
     )
@@ -54,9 +54,6 @@ def create_app(test_config=None):
     # --------------
     from . import db
     db.init_app(app)
-
-    # Register Routes
-    # ---------------
 
     # Auth Routes
     #----------------
